@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getFarcasterFrameData, getLensterFrameData } from "@/utils";
+import {
+  convertToSecondsOrMinutes,
+  getFarcasterFrameData,
+  getLensterFrameData,
+} from "@/utils";
+import { HeartBitCore, SupportedChain } from "@fileverse/heartbit-core";
 
 import {
   FrameButtonMetadata,
@@ -7,7 +12,7 @@ import {
 } from "@coinbase/onchainkit";
 import { AppName, FrameState } from "@/types";
 
-const { HOST } = process.env;
+const { HOST, NETWORK, API_KEY } = process.env;
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const { searchParams } = new URL(req.url);
@@ -20,11 +25,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (!frameData) return new NextResponse(null, { status: 500 });
 
-  const { owner, username, buttonIndex } = frameData;
+  const { owner, buttonIndex } = frameData;
 
   const frameState =
     (searchParams.get("frameState") as FrameState) || FrameState.Idle;
-  const startTime = searchParams.get("startTime");
+  const startTime = searchParams.get("startTime") || "0";
 
   const buttons = [
     { label: "Reload", action: "post" } as FrameButtonMetadata,
@@ -46,22 +51,38 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
 
   if (frameState === FrameState.Started && buttonIndex === 1) {
+    const endTime = Date.now();
+    const frameState = FrameState.Completed;
+    const coreSDK = new HeartBitCore({
+      chain: NETWORK as SupportedChain,
+    });
+
+    const response = await coreSDK.unSignedMintHeartBit({
+      account: owner,
+      startTime: Math.floor(parseInt(startTime) / 1000),
+      endTime: Math.floor(endTime / 1000),
+      hash: "ipfs://cid",
+      apiKey: API_KEY as string,
+    });
+    console.log(response);
     return new NextResponse(
       getFrameHtmlResponse({
         image: {
-          src: `${HOST}/image?app=${appName}&frameState=${frameState}&startTime=${startTime}`,
+          src: `${HOST}/image?app=${appName}&frameState=${frameState}&startTime=${startTime}&endTime=${endTime}`,
         },
-        postUrl: `${HOST}/frame?app=${appName}&frameState=${frameState}&startTime=${startTime}`,
+        postUrl: `${HOST}/frame?app=${appName}&frameState=${frameState}&startTime=${startTime}&endTime=${endTime}`,
         buttons: buttons as any,
       })
     );
   }
 
+  const elapsedTime = Math.floor((Date.now() - parseInt(startTime)) / 1000);
+  const timeSpent = convertToSecondsOrMinutes(elapsedTime);
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: buttons as any,
       image: {
-        src: `${HOST}/image?app=${appName}&startTime=${startTime}&frameState=${frameState}`,
+        src: `${HOST}/image?app=${appName}&startTime=${startTime}&frameState=${frameState}&timeSpent=${timeSpent}`,
       },
       postUrl: `${HOST}/frame?app=${appName}&startTime=${startTime}&frameState=${frameState}`,
     })

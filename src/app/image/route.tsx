@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
     const isComplete = frameState === FrameState.Completed;
     const startTime = searchParams.get("startTime") || "0";
     const endTime = searchParams.get("endTime") || "0";
+    const timeSpent = searchParams.get("timeSpent") || "";
 
     if (isComplete) {
       return await sendImageResponse(
@@ -25,9 +26,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (frameState === FrameState.Started) {
-      return sendImageResponse(
-        <ProgressFrame startTime={parseInt(startTime)} />
-      );
+      return sendImageResponse(<ProgressFrame timeSpent={timeSpent} />);
     }
 
     return sendImageResponse(<InitialFrame />);
@@ -45,8 +44,7 @@ const sendImageResponse = async (children: React.ReactNode) => {
   return new NextResponse(pngBuffer, {
     headers: {
       "Content-Type": "image/png",
+      "max-age": "0",
     },
   });
 };
-
-export const dynamic = "force-dynamic";
