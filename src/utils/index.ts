@@ -13,13 +13,6 @@ import { gql, GraphQLClient } from "graphql-request";
 const regularFontPath = join(process.cwd(), "/fonts/Nunito-Regular.ttf");
 const boldFontPath = join(process.cwd(), "/fonts/Nunito-Bold.ttf");
 
-interface frameData {
-  fid: number;
-  buttonIndex: number;
-  owner: string;
-  username: string;
-}
-
 export interface ResolvedFrameData {
   fid: number;
   buttonIndex: number;

@@ -3,7 +3,7 @@ import satori from "satori";
 import sharp from "sharp";
 import { getImageOptions } from "@/utils";
 import { FrameState } from "@/types";
-import { InitialFrame, ProgressFrame, ResultFrame } from "../../components";
+import { InitialFrame, ProgressFrame, ResultFrame } from "@/components";
 
 export async function GET(request: NextRequest) {
   try {
@@ -48,3 +48,5 @@ const sendImageResponse = async (children: React.ReactNode) => {
     },
   });
 };
+
+export const dynamic = "force-dynamic";

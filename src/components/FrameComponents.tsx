@@ -1,5 +1,5 @@
 import { convertToSecondsOrMinutes } from "@/utils";
-import { CSSProperties } from "react";
+import type { CSSProperties } from "react";
 
 const FullFrame = {
   width: "100%",

@@ -25,48 +25,45 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const frameState =
     (searchParams.get("frameState") as FrameState) || FrameState.Idle;
   const startTime = searchParams.get("startTime");
-  const isComplete = frameState === FrameState.Completed;
-
-  if (isComplete) {
-    // mintMangaNFT({
-    //   account: owner,
-    //   startTime: Math.floor(startTimeInMillis / 1000),
-    //   endTime: Math.floor(endTimeInMillis / 1000),
-    // }).catch(console.error);
-
-    return new NextResponse(
-      getFrameHtmlResponse({
-        image: {
-          src: `${HOST}/image?isComplete=true&app=${appName}`,
-          aspectRatio: "1:1",
-        },
-      })
-    );
-  }
-
-  if (frameState === FrameState.Idle) {
-    return new NextResponse(
-      getFrameHtmlResponse({
-        image: {
-          src: `${HOST}/image?app=${appName}`,
-        },
-        postUrl: `${HOST}/frame?app=${appName}`,
-      })
-    );
-  }
 
   const buttons = [
     { label: "Reload", action: "post" } as FrameButtonMetadata,
     { label: "Mint HeartBit", action: "post" } as FrameButtonMetadata,
   ];
 
+  if (frameState === FrameState.Idle) {
+    const startTime = Date.now();
+    const frameState = FrameState.Started;
+    return new NextResponse(
+      getFrameHtmlResponse({
+        image: {
+          src: `${HOST}/image?app=${appName}&frameState=${frameState}&startTime=${startTime}`,
+        },
+        postUrl: `${HOST}/frame?app=${appName}&frameState=${frameState}&startTime=${startTime}`,
+        buttons: buttons as any,
+      })
+    );
+  }
+
+  if (frameState === FrameState.Started && buttonIndex === 1) {
+    return new NextResponse(
+      getFrameHtmlResponse({
+        image: {
+          src: `${HOST}/image?app=${appName}&frameState=${frameState}&startTime=${startTime}`,
+        },
+        postUrl: `${HOST}/frame?app=${appName}&frameState=${frameState}&startTime=${startTime}`,
+        buttons: buttons as any,
+      })
+    );
+  }
+
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: buttons as any,
       image: {
-        src: `${HOST}/image?app=${appName}`,
+        src: `${HOST}/image?app=${appName}&startTime=${startTime}&frameState=${frameState}`,
       },
-      postUrl: `${HOST}/frame?app=${appName}`,
+      postUrl: `${HOST}/frame?app=${appName}&startTime=${startTime}&frameState=${frameState}`,
     })
   );
 }

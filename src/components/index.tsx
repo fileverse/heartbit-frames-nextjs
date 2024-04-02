@@ -1,5 +1,3 @@
-// import { Button, FrameContext } from "frog";
-
 import { convertToSecondsOrMinutes } from "@/utils";
 import { TextFrame, ResultFrameImage } from "./FrameComponents";
 
