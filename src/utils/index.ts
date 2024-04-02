@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 
-import { NeynarAPIClient } from "@neynar/nodejs-sdk";
 import {
   FrameRequest,
   getFrameMessage,
@@ -11,8 +10,8 @@ import * as fs from "fs";
 import type { FontStyle, FontWeight } from "satori";
 import { gql, GraphQLClient } from "graphql-request";
 
-const regularFontPath = join(process.cwd(), "/Nunito-Regular.ttf");
-const boldFontPath = join(process.cwd(), "/Nunito-Bold.ttf");
+const regularFontPath = join(process.cwd(), "/fonts/Nunito-Regular.ttf");
+const boldFontPath = join(process.cwd(), "/fonts/Nunito-Bold.ttf");
 
 interface frameData {
   fid: number;
