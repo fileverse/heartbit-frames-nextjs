@@ -25,9 +25,9 @@ The easiest way to deploy this Next.js app is to use the [Vercel Platform](https
 
 ## Example Frames
 
-* Frame #1
-* Frame #2
-* Frame #3
+* [Introducing 🖼 Frame HeartBit](https://warpcast.com/miroyato/0xd71aa752)
+* [♥️ Introducing: ‘Absolute essentials of Ethereum’](https://warpcast.com/miroyato/0xe74b6e97)
+* [♡Mint some love for the speakers via Frame](https://warpcast.com/miroyato/0xbbdb4ece)
 
 ## References
 
