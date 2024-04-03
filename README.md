@@ -1,4 +1,4 @@
-# Heartbit x Frames
+# Heartbit x Frames x Gnosis
 
 Frames have taken the social fi space by storm and rightly so. They are easiest way to find crypto specific audience that know what is a wallet and how to use it.
 
