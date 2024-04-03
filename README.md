@@ -1,8 +1,8 @@
 # Heartbit x Frames
 
-Frames have taken the social fi space by storm and rightly so. They are easiest way to find crypto specific audience that know what is a wallet and how to use it.
+This repo is designed to help you take advantage of crypto native distribution channels and social media. It breaks down the requirements for deploying Farcaster Frames and/or Lens OpenActions with HeartBit to improve user experience. 
 
-With heartbit being a tool for measuring engagement we created a simple frame with heartbit integrated for measuring engagements of the user.
+Using this HeartBit x Frame SDK you will be able to leverage Smart Accounts with several decentralized protocols, including the Safe Protocol and Pimlico with your Frame (using also Paradigm’s Frog frame framework or a Nexjs frame generator).
 
 ## Getting Started
 
