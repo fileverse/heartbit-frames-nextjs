@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.11.0
     version: 0.11.0(@tanstack/react-query@5.28.9)(@xmtp/frames-validator@0.5.2)(graphql-request@6.1.0)(graphql@14.7.0)(react-dom@18.2.0)(react@18.2.0)(viem@2.9.6)
   '@fileverse/heartbit-core':
-    specifier: ^2.3.0
-    version: 2.3.0
+    specifier: ^2.4.0
+    version: 2.4.0
   '@neynar/nodejs-sdk':
     specifier: ^1.14.0
     version: 1.14.0(typescript@5.4.3)
@@ -144,8 +144,8 @@ packages:
     engines: {node: '>=14'}
     dev: false
 
-  /@fileverse/heartbit-core@2.3.0:
-    resolution: {integrity: sha512-iEwdw9J73e14uPKCkNIrKpuvYzeK0nModIkLoSKn7Zc3kaKgPFynwrkgTp/Ft1Pgzg1TrpGcKQveVZ0hUOw41g==}
+  /@fileverse/heartbit-core@2.4.0:
+    resolution: {integrity: sha512-JD3T5GVU2gC9l334c2+8VoUG5+l7EF09EEzBUsAQlafRmLjFwdq69owTfDdTM6paQSdxhT+hi5vAfIHHOA3n6w==}
     dependencies:
       ethers: 6.11.1
     transitivePeerDependencies:
