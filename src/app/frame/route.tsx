@@ -58,7 +58,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     });
 
     const response = await coreSDK.unSignedMintHeartBit({
-      account: owner,
+      address: owner,
       startTime: Math.floor(parseInt(startTime) / 1000),
       endTime: Math.floor(endTime / 1000),
       hash: "ipfs://cid",
