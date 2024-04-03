@@ -14,6 +14,8 @@ import { AppName, FrameState } from "@/types";
 
 const { HOST, NETWORK, API_KEY } = process.env;
 
+const FILEVERSE_WARPCAST_URL = "https://warpcast.com/fileverse";
+
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const { searchParams } = new URL(req.url);
 
@@ -58,7 +60,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     });
 
     const response = await coreSDK.unSignedMintHeartBit({
-      address: owner,
+      account: owner,
       startTime: Math.floor(parseInt(startTime) / 1000),
       endTime: Math.floor(endTime / 1000),
       hash: "ipfs://cid", // ipfs hash of json file with metadata that you want for these nfts
@@ -70,8 +72,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         image: {
           src: `${HOST}/image?app=${appName}&frameState=${frameState}&startTime=${startTime}&endTime=${endTime}`,
         },
-        postUrl: `${HOST}/frame?app=${appName}&frameState=${frameState}&startTime=${startTime}&endTime=${endTime}`,
-        buttons: buttons as any,
+        buttons: [
+          {
+            label: "Follow Fileverse",
+            action: "link",
+            target: FILEVERSE_WARPCAST_URL,
+          },
+        ],
       })
     );
   }
