@@ -13,7 +13,9 @@ With heartbit being a tool for measuring engagement we created a simple frame wi
 For running the development server on your local:
 
 ```bash
-npm run dev
+# set your .env.local vars as per the .env.example
+pnpm install
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
