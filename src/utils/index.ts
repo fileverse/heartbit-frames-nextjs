@@ -146,35 +146,36 @@ export const getHeyFrameMetadata = function ({
   const refreshPeriodToUse = refreshPeriod;
 
   const metadata: Record<string, string> = {
-    "hey:portal": "vLatest",
+    "of:version": "1.0.0",
+    "of:accepts:lens": "1.0.0",
   };
   if (typeof image === "string") {
-    metadata["hey:portal:image"] = image;
+    metadata["of:image"] = image;
   } else {
-    metadata["hey:portal:image"] = image.src;
+    metadata["of:image"] = image.src;
     if (image.aspectRatio) {
-      metadata["hey:portal:image:aspect_ratio"] = image.aspectRatio;
+      metadata["of:image:aspect_ratio"] = image.aspectRatio;
     }
   }
   if (input) {
-    metadata["hey:portal:input:text"] = input.text;
+    metadata["of:input:text"] = input.text;
   }
   if (buttons) {
     buttons.forEach((button, index) => {
-      metadata[`hey:portal:button:${index + 1}`] = button.label;
+      metadata[`of:button:${index + 1}`] = button.label;
       if (button.action) {
-        metadata[`hey:portal:button:${index + 1}:action`] = button.action;
+        metadata[`of:button:${index + 1}:action`] = button.action;
       }
       if (
         (button.action == "link" || button.action == "mint") &&
         button.target
       ) {
-        metadata[`hey:portal:button:${index + 1}:target`] = button.target;
+        metadata[`of:button:${index + 1}:target`] = button.target;
       }
     });
   }
   if (postUrlToUse) {
-    metadata["hey:portal:post_url"] = postUrlToUse;
+    metadata["of:post_url:post_url"] = postUrlToUse;
   }
   if (refreshPeriodToUse) {
     metadata["hey:portal:refresh_period"] = refreshPeriodToUse.toString();
