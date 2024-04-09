@@ -151,8 +151,10 @@ export const getHeyFrameMetadata = function ({
   };
   if (typeof image === "string") {
     metadata["of:image"] = image;
+    metadata["og:image"] = image;
   } else {
     metadata["of:image"] = image.src;
+    metadata["og:image"] = image.src;
     if (image.aspectRatio) {
       metadata["of:image:aspect_ratio"] = image.aspectRatio;
     }
